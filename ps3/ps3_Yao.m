@@ -24,7 +24,7 @@ for i = 1:n
     % find the minimizer of the negative loglikelihood function
     [xmin,fval] = fminsearch(func, x0);
     stats(i,1) = xmin(1) - alpha0;
-    stats(:,2) = xmin(2) - beta0;
+    stats(i,2) = xmin(2) - beta0;
 end
 
 mbias = mean(stats);
