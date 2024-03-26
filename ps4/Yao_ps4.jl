@@ -12,7 +12,7 @@ d = Int.(a .+ x*b .+ epsilon .> 0);
 # Maximum Score estimator
 function MS(d,x,β)
     i = Int.(sqrt(1-β^2) .+ β*x .> 0);
-    return -mean((2*d.-1).*i)
+    return mean((d -i).^2)
 end
 
 β_initial = [0.0];
