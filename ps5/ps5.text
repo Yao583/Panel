@@ -1,0 +1,146 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/luoyao/Downloads/Github/Panel/ps5/ps5.text
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}26 Mar 2024, 22:31:38
+{txt}
+{com}. bcuse jtrain2
+
+{txt}Contains data from {res}http://fmwww.bc.edu/ec-p/data/wooldridge/jtrain2.dta
+{txt} Observations:{res}           445                  
+{txt}    Variables:{res}            19                  17 Jan 2000 17:20
+{txt}{hline}
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+{hline}
+{p 0 48}{res}{bind:train          }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if assigned to job training{p_end}
+{p 0 48}{bind:age            }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}age in 1977{p_end}
+{p 0 48}{bind:educ           }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}years of education{p_end}
+{p 0 48}{bind:black          }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if black{p_end}
+{p 0 48}{bind:hisp           }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if Hispanic{p_end}
+{p 0 48}{bind:married        }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if married{p_end}
+{p 0 48}{bind:nodegree       }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if no high school degree{p_end}
+{p 0 48}{bind:mosinex        }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}# mnths prior to 1/78 in expmnt{p_end}
+{p 0 48}{bind:re74           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}real earns., 1974, $1000s{p_end}
+{p 0 48}{bind:re75           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}real earns., 1975, $1000s{p_end}
+{p 0 48}{bind:re78           }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}real earns., 1978, $1000s{p_end}
+{p 0 48}{bind:unem74         }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if unem. all of 1974{p_end}
+{p 0 48}{bind:unem75         }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if unem. all of 1975{p_end}
+{p 0 48}{bind:unem78         }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}=1 if unem. all of 1978{p_end}
+{p 0 48}{bind:lre74          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}log(re74); zero if re74 == 0{p_end}
+{p 0 48}{bind:lre75          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}log(re75); zero if re75 == 0{p_end}
+{p 0 48}{bind:lre78          }{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}log(re78); zero if re78 == 0{p_end}
+{p 0 48}{bind:agesq          }{txt}{bind: int     }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}age^2{p_end}
+{p 0 48}{bind:mostrn         }{txt}{bind: byte    }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}months in training{p_end}
+{txt}{hline}
+Sorted by: 
+
+{com}. // estimate the propensity score
+.  probit train lre74 lre75 agesq nodegree married black hisp
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:    -302.1}  
+Iteration 1:{space 3}log likelihood = {res:-293.86871}  
+Iteration 2:{space 3}log likelihood = {res:-293.86296}  
+Iteration 3:{space 3}log likelihood = {res:-293.86296}  
+{res}
+{txt}Probit regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:445}
+{txt}{col 57}{lalign 13:LR chi2({res:7})}{col 70} = {res}{ralign 6:16.47}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0211}
+{txt}Log likelihood = {res:-293.86296}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.0273}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       train{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}lre74 {c |}{col 14}{res}{space 2}-.0781476{col 26}{space 2} .0887833{col 37}{space 1}   -0.88{col 46}{space 3}0.379{col 54}{space 4}-.2521598{col 67}{space 3} .0958646
+{txt}{space 7}lre75 {c |}{col 14}{res}{space 2} .1563809{col 26}{space 2} .0998418{col 37}{space 1}    1.57{col 46}{space 3}0.117{col 54}{space 4}-.0393054{col 67}{space 3} .3520672
+{txt}{space 7}agesq {c |}{col 14}{res}{space 2} .0000634{col 26}{space 2} .0001451{col 37}{space 1}    0.44{col 46}{space 3}0.662{col 54}{space 4} -.000221{col 67}{space 3} .0003479
+{txt}{space 4}nodegree {c |}{col 14}{res}{space 2}-.4487499{col 26}{space 2} .1494584{col 37}{space 1}   -3.00{col 46}{space 3}0.003{col 54}{space 4} -.741683{col 67}{space 3}-.1558168
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .0844636{col 26}{space 2} .1672927{col 37}{space 1}    0.50{col 46}{space 3}0.614{col 54}{space 4}-.2434241{col 67}{space 3} .4123513
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-.1621224{col 26}{space 2} .2269417{col 37}{space 1}   -0.71{col 46}{space 3}0.475{col 54}{space 4}-.6069199{col 67}{space 3} .2826752
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2}-.5042208{col 26}{space 2} .3075893{col 37}{space 1}   -1.64{col 46}{space 3}0.101{col 54}{space 4}-1.107085{col 67}{space 3} .0986431
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}  .242841{col 26}{space 2} .2552612{col 37}{space 1}    0.95{col 46}{space 3}0.341{col 54}{space 4}-.2574618{col 67}{space 3} .7431439
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}.  predict ps
+{txt}(option {bf:pr} assumed; Pr(train))
+
+{com}. 
+. // regress y on 1 D p(x)
+. regress unem78 train ps
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(2, 442)       = {res}     3.22
+{txt}       Model {c |} {res} 1.36369706         2   .68184853   {txt}Prob > F        ={res}    0.0407
+{txt}    Residual {c |} {res} 93.4587748       442  .211445192   {txt}R-squared       ={res}    0.0144
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0099
+{txt}       Total {c |} {res} 94.8224719       444  .213564126   {txt}Root MSE        =   {res} .45983
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      unem78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2}-.1067773{col 26}{space 2} .0450653{col 37}{space 1}   -2.37{col 46}{space 3}0.018{col 54}{space 4}-.1953463{col 67}{space 3}-.0182084
+{txt}{space 10}ps {c |}{col 14}{res}{space 2}-.1043735{col 26}{space 2} .2357848{col 37}{space 1}   -0.44{col 46}{space 3}0.658{col 54}{space 4}-.5677722{col 67}{space 3} .3590251
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .3956306{col 26}{space 2} .0986067{col 37}{space 1}    4.01{col 46}{space 3}0.000{col 54}{space 4} .2018342{col 67}{space 3} .5894269
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. // regress y on 1 D p(x) D(p-u)
+. egen mean_ps = mean(ps)
+{txt}
+{com}. generate u = ps - mean_ps
+{txt}
+{com}. generate dp = train*u
+{txt}
+{com}. regress unem78 train ps dp
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(3, 441)       = {res}     2.65
+{txt}       Model {c |} {res} 1.67809531         3  .559365104   {txt}Prob > F        ={res}    0.0485
+{txt}    Residual {c |} {res} 93.1443766       441  .211211738   {txt}R-squared       ={res}    0.0177
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0110
+{txt}       Total {c |} {res} 94.8224719       444  .213564126   {txt}Root MSE        =   {res} .45958
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      unem78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2} -.103649{col 26}{space 2} .0451134{col 37}{space 1}   -2.30{col 46}{space 3}0.022{col 54}{space 4} -.192313{col 67}{space 3}-.0149851
+{txt}{space 10}ps {c |}{col 14}{res}{space 2} .1489435{col 26}{space 2} .3140732{col 37}{space 1}    0.47{col 46}{space 3}0.636{col 54}{space 4}-.4683227{col 67}{space 3} .7662097
+{txt}{space 10}dp {c |}{col 14}{res}{space 2}-.5796415{col 26}{space 2} .4750928{col 37}{space 1}   -1.22{col 46}{space 3}0.223{col 54}{space 4}-1.513369{col 67}{space 3} .3540858
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .2942188{col 26}{space 2} .1289246{col 37}{space 1}    2.28{col 46}{space 3}0.023{col 54}{space 4} .0408359{col 67}{space 3} .5476017
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. // regress y on 1 d x
+. regress  unem78 train lre74 lre75 agesq nodegree married black hisp
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       445
+{txt}{hline 13}{c +}{hline 34}   F(8, 436)       = {res}     2.81
+{txt}       Model {c |} {res} 4.64187438         8  .580234297   {txt}Prob > F        ={res}    0.0049
+{txt}    Residual {c |} {res} 90.1805975       436  .206836233   {txt}R-squared       ={res}    0.0490
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0315
+{txt}       Total {c |} {res} 94.8224719       444  .213564126   {txt}Root MSE        =   {res} .45479
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      unem78{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}train {c |}{col 14}{res}{space 2}-.1072122{col 26}{space 2} .0445697{col 37}{space 1}   -2.41{col 46}{space 3}0.017{col 54}{space 4}-.1948103{col 67}{space 3}-.0196141
+{txt}{space 7}lre74 {c |}{col 14}{res}{space 2}  .004653{col 26}{space 2} .0315202{col 37}{space 1}    0.15{col 46}{space 3}0.883{col 54}{space 4}-.0572974{col 67}{space 3} .0666035
+{txt}{space 7}lre75 {c |}{col 14}{res}{space 2}-.0443124{col 26}{space 2} .0356831{col 37}{space 1}   -1.24{col 46}{space 3}0.215{col 54}{space 4}-.1144448{col 67}{space 3}   .02582
+{txt}{space 7}agesq {c |}{col 14}{res}{space 2}-2.44e-06{col 26}{space 2} .0000514{col 37}{space 1}   -0.05{col 46}{space 3}0.962{col 54}{space 4}-.0001036{col 67}{space 3} .0000987
+{txt}{space 4}nodegree {c |}{col 14}{res}{space 2} .0321274{col 26}{space 2} .0543932{col 37}{space 1}    0.59{col 46}{space 3}0.555{col 54}{space 4}-.0747782{col 67}{space 3} .1390329
+{txt}{space 5}married {c |}{col 14}{res}{space 2}-.0092539{col 26}{space 2} .0601481{col 37}{space 1}   -0.15{col 46}{space 3}0.878{col 54}{space 4}-.1274703{col 67}{space 3} .1089624
+{txt}{space 7}black {c |}{col 14}{res}{space 2} .1841554{col 26}{space 2} .0814682{col 37}{space 1}    2.26{col 46}{space 3}0.024{col 54}{space 4} .0240362{col 67}{space 3} .3442745
+{txt}{space 8}hisp {c |}{col 14}{res}{space 2}-.0440245{col 26}{space 2}  .107788{col 37}{space 1}   -0.41{col 46}{space 3}0.683{col 54}{space 4}-.2558732{col 67}{space 3} .1678241
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .1912158{col 26}{space 2} .0951377{col 37}{space 1}    2.01{col 46}{space 3}0.045{col 54}{space 4} .0042302{col 67}{space 3} .3782014
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/luoyao/Downloads/Github/Panel/ps5/ps5.text
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}26 Mar 2024, 22:31:40
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
